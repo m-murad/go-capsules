@@ -14,7 +14,7 @@ func (s *stack) Push(str string) {
 func (s *stack) Pop() (str string, err error) {
 	defer func() {
 		if rec := recover(); rec != nil {
-			str, err = "", errors.New("stack under flow")
+			err =  errors.New("stack under flow")
 		}
 	}()
 
@@ -23,7 +23,6 @@ func (s *stack) Pop() (str string, err error) {
 	*s = (*s)[:len(*s)-1]
 
 	return str, nil
-
 }
 
 func main() {
@@ -41,5 +40,5 @@ func main() {
 	str, err = myStk.Pop() // Will return string "b" and nil error. Stack becomes ["a"]
 	str, err = myStk.Pop() // Will return string "a" and nil error. Stack becomes []
 	str, err = myStk.Pop() // Will return empty string "" and non-nil error.
-	fmt.Printf("Failed to pop item: %v\n", err)
+	fmt.Printf("Failed to pop stack: %v\n", err)
 }
